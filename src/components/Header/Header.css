@@ -1,0 +1,65 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: wheat;
+  align-items: center;
+  min-height: 100vh;
+  max-width: 320px;
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    max-width: 100%;
+    padding: 10px;
+    gap: 10px;
+    min-height: auto;
+  }
+}
+
+.header__title {
+  margin: 0;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+@media screen and (max-width: 600px) {
+  .header__title {
+    font-size: 31px;
+    line-height: 39px;
+  }
+}
+
+.header__buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.header__button {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 16px;
+  color: #000;
+  text-decoration: underline;
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  transition: all 0.3s ease;
+}
+
+.header__button:hover {
+  color: red;
+}
+
+@media screen and (max-width: 600px) {
+  .header__button {
+    font-size: 11px;
+    line-height: 16px;
+  }
+}

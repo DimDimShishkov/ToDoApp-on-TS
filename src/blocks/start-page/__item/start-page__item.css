@@ -1,0 +1,14 @@
+.start-page__item {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 50px;
+  letter-spacing: -0.04em;
+  color: #000000;
+  margin: 0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.start-page__item:hover {
+  color: red;
+}

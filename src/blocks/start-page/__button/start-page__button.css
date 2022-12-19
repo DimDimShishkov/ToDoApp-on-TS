@@ -1,0 +1,17 @@
+.start-page__button {
+  background: #3456f3;
+  border-radius: 10px;
+  border: none;
+  padding: 5px 10px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  color: #ffffff;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.start-page__button:hover {
+  opacity: 0.8;
+}

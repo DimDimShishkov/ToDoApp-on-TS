@@ -1,0 +1,13 @@
+.start-page__container {
+  background-color: aliceblue;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 10px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
