@@ -1,15 +1,10 @@
-import { useState } from "react";
-import Card from "../Card/Card";
-import Header from "../Header/Header";
-import StartPage from "../StartPage/StartPage";
+import ProjectPage from "../ProjectPage/ProjectPage";
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
-      <Header></Header>
+      <ProjectPage />
     </div>
   );
 }
-
-export default App;

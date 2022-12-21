@@ -1,0 +1,59 @@
+.main {
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.main__item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 6px;
+  background-color: rgb(246, 248, 250);
+  border: 1px solid rgb(216, 222, 228);
+  padding: 5px 10px;
+  gap: 10px;
+  box-sizing: border-box;
+}
+
+.main__header {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.main__heading {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  cursor: default;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+  margin: 0;
+  text-align: left;
+}
+
+.main__counter {
+  font-weight: 600;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 1;
+  border-radius: 20px;
+  background-color: rgba(175, 184, 193, 0.2);
+  color: rgb(87, 96, 106);
+}
+
+.main__add-button {
+  margin-left: auto;
+  background: transparent;
+  border: 0px;
+  box-shadow: unset;
+  cursor: pointer;
+  color: rgb(87, 96, 106);
+  font-size: 12px;
+  align-items: center;
+  display: flex;
+}
