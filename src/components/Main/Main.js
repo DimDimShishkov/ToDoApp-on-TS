@@ -1,35 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Main.css";
 import MainItem from "./MainItem";
 
 export default function Main() {
-  let cardsArr = [
+  const [cardsArr, setCardsArr] = useState([
     {
       section: "ToDo",
       name: "test1",
       priority: "medium",
       time: "13:00",
       id: 1,
-      dateStar: "21.12.2022",
-      dateFin: "22.12.2022",
-      description: "test test",
-    },
-    {
-      section: "ToDo",
-      name: "test2",
-      priority: "medium",
-      time: "13:00",
-      id: 2,
-      dateStar: "21.12.2022",
-      dateFin: "22.12.2022",
-      description: "test test",
-    },
-    {
-      section: "ToDo",
-      name: "test3",
-      priority: "medium",
-      time: "13:00",
-      id: 3,
       dateStar: "21.12.2022",
       dateFin: "22.12.2022",
       description: "test test",
@@ -54,7 +34,7 @@ export default function Main() {
       dateFin: "22.12.2022",
       description: "test test",
     },
-  ];
+  ]);
 
   return (
     <section className="main">

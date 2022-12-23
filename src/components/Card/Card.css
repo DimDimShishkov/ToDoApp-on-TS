@@ -1,5 +1,5 @@
 .card {
-  background: #fcfcfd;
+  background: rgb(252, 252, 253);
   border-radius: 6px;
   box-shadow: 0 0.5px 2px rgb(16 24 40 / 70%);
   cursor: -webkit-grab;
@@ -17,7 +17,7 @@
 }
 
 .card:hover {
-  background: aliceblue;
+  background: rgb(240, 248, 255);
 }
 
 .card__header {
@@ -55,6 +55,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: transparent;
 }
 .card__info-text {
   display: flex;
@@ -103,7 +104,7 @@
 }
 
 .card__id {
-  color: #98a2b3;
+  color: rgb(152, 162, 179);
   font-size: 0.6em;
   font-style: normal;
   font-weight: 300;
@@ -115,7 +116,7 @@
 }
 
 .card__date {
-  color: #98a2b3;
+  color: rgb(152, 162, 179);
   font-size: 0.6em;
   font-style: normal;
   font-weight: 300;
@@ -160,7 +161,7 @@
   bottom: 15px;
   right: 0;
   padding: 10px;
-  background: #98a2b3;
+  background: rgb(152, 162, 179);
   transition: all 0.3s ease;
   border-radius: 6px;
 }
@@ -182,8 +183,8 @@
 
 .card__footer-button {
   margin: 0;
-  background: aliceblue;
-  border: 1px solid aliceblue;
+  background: rgb(240, 248, 255);
+  border: 1px solid rgb(240, 248, 255);
   border-radius: 6px;
   box-shadow: unset;
   cursor: pointer;

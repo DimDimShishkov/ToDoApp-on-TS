@@ -1,6 +1,9 @@
+import { useDispatch } from "react-redux";
 import "./Header.css";
 
 export default function Header() {
+  const dispatch = useDispatch();
+
   return (
     <header className="header">
       <h1 className="header__title">current project</h1>

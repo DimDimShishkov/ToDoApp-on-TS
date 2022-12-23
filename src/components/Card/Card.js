@@ -4,8 +4,6 @@ import "./Card.css";
 export default function Card({ card }) {
   const [isOptionsOpen, setOptionOpen] = useState(false);
 
-  let content;
-
   const toQueueHandler = (card) => {
     card.section = "ToDo";
   };
@@ -16,6 +14,8 @@ export default function Card({ card }) {
     card.section = "Done";
   };
 
+  // отображение текста на модалки с меню
+  let content;
   switch (card.section) {
     case "ToDo":
       content = (
@@ -87,29 +87,41 @@ export default function Card({ card }) {
       );
   }
 
+  // слушатели на закрытие модалки меню
   const closeOptions = (e) => {
-    /*     let item = e.target
+    let item = e.target
       .closest("div")
       .classList.contains("card__footer-menu_active");
-    if (!item) { */
-    setOptionOpen(false);
-    document.removeEventListener("click", closeOptions);
-    // }
+    if (!item) {
+      setOptionOpen(false);
+      document.removeEventListener("mouseup", closeOptions);
+    }
   };
   useEffect(() => {
-    isOptionsOpen && document.addEventListener("click", closeOptions);
+    isOptionsOpen && document.addEventListener("mouseup", closeOptions);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOptionsOpen]);
 
   function dragStartHandler() {}
+
   function dragEndHandler(e) {
-    e.target.style.background = "#fcfcfd";
+    if (e.target.closest(".card")) {
+      e.target.closest(".card").style.background = "rgb(252, 252, 253)";
+    }
   }
+
   function dragOverHandler(e) {
     e.preventDefault();
-    e.target.style.background = "lightgrey";
+    if (e.target.closest(".card")) {
+      e.target.closest(".card").style.background = "lightgrey";
+    }
   }
-  function dropHandler() {}
+
+  function dropHandler(e) {
+    if (e.target.closest(".card")) {
+      e.target.closest(".card").style.background = "rgb(252, 252, 253)";
+    }
+  }
 
   return (
     <div
@@ -145,10 +157,7 @@ export default function Card({ card }) {
           <button className="card__comment-button card__button" />
           <button className="card__attachment-button card__button" />
         </div>
-        <div
-          className="card__footer-action"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="card__footer-action">
           <button
             className="card__footer-more"
             onClick={() => setOptionOpen(true)}
