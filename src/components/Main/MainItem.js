@@ -1,7 +1,12 @@
 import React from "react";
 import Card from "../Card/Card";
 
-export default function MainItem({ name, children }) {
+export default function MainItem({
+  name,
+  children,
+  handleOpenPopupEditTask,
+  setTaskEdit,
+}) {
   return (
     <section className="main__item">
       <div className="main__header">
@@ -10,7 +15,12 @@ export default function MainItem({ name, children }) {
         <button className="main__add-button">Add item</button>
       </div>
       {children.map((card) => (
-        <Card key={card.id} card={card} />
+        <Card
+          key={card.id}
+          card={card}
+          handleOpenPopupEditTask={handleOpenPopupEditTask}
+          setTaskEdit={setTaskEdit}
+        />
       ))}
     </section>
   );

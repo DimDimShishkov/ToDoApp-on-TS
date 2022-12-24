@@ -33,6 +33,7 @@
   line-height: 29px;
   margin: 0;
   padding: 0;
+  text-align: center;
 }
 
 @media screen and (max-width: 460px) {

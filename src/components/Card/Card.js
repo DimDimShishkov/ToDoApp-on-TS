@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./Card.css";
 
-export default function Card({ card }) {
+export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
   const [isOptionsOpen, setOptionOpen] = useState(false);
 
   const toQueueHandler = (card) => {
@@ -102,26 +102,30 @@ export default function Card({ card }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOptionsOpen]);
 
+  // слушатели на перенос карточки
   function dragStartHandler() {}
-
   function dragEndHandler(e) {
     if (e.target.closest(".card")) {
       e.target.closest(".card").style.background = "rgb(252, 252, 253)";
     }
   }
-
   function dragOverHandler(e) {
     e.preventDefault();
     if (e.target.closest(".card")) {
       e.target.closest(".card").style.background = "lightgrey";
     }
   }
-
   function dropHandler(e) {
     if (e.target.closest(".card")) {
       e.target.closest(".card").style.background = "rgb(252, 252, 253)";
     }
   }
+
+  // открытие модалки для редактирования карточки
+  const handleEditTask = () => {
+    handleOpenPopupEditTask(true);
+    setTaskEdit(card);
+  };
 
   return (
     <div
@@ -134,7 +138,7 @@ export default function Card({ card }) {
       draggable={true}
     >
       <div className="card__header">
-        <h2 className="card__heading">{card.name}</h2>
+        <h2 className="card__heading">{card.title}</h2>
         <div className="card__header-container">
           <p className="card__priority">{card.priority}</p>
           <p className="card__time">{card.time}</p>
@@ -147,7 +151,10 @@ export default function Card({ card }) {
           <p className="card__date">DL: {card.dateFin}</p>
         </div>
         <div className="card__info-buttons">
-          <button className=" card__edit-button card__button" />
+          <button
+            className=" card__edit-button card__button"
+            onClick={() => handleEditTask()}
+          />
           <button className=" card__delete-button card__button" />
         </div>
       </div>

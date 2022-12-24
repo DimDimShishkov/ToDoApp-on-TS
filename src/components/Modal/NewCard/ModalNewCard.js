@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./ModalNewCard.css";
 
-export default function ModalNewCard() {
+export default function ModalNewCard({ handleSubmitForm }) {
   const [isFilesDropping, setFilesDropping] = useState(false);
   const [attachments, setAttachments] = useState(0);
 
@@ -13,7 +13,7 @@ export default function ModalNewCard() {
   } = useForm({ mode: "onChange" });
 
   const onSubmit = (data) => {
-    console.log({ ...data, attachments });
+    handleSubmitForm({ ...data, attachments });
   };
 
   // добавление файлов
@@ -143,13 +143,15 @@ export default function ModalNewCard() {
         </span>
       </fieldset>
 
-      <input
+      <button
         type="submit"
         className={`form__submit-button ${
           !isValid && "form__submit-button_disabled"
         }`}
         disabled={!isValid}
-      />
+      >
+        Submit
+      </button>
     </form>
   );
 }

@@ -2,36 +2,36 @@ import React, { useState } from "react";
 import "./Main.css";
 import MainItem from "./MainItem";
 
-export default function Main() {
+export default function Main({ setTaskEdit, handleOpenPopupEditTask }) {
   const [cardsArr, setCardsArr] = useState([
     {
       section: "ToDo",
-      name: "test1",
+      title: "test1",
       priority: "medium",
-      time: "13:00",
+      time: "12:44",
       id: 1,
-      dateStar: "21.12.2022",
-      dateFin: "22.12.2022",
+      dateStar: "2022-12-24",
+      dateFin: "2022-12-24",
       description: "test test",
     },
     {
       section: "In Progress",
-      name: "test4",
+      title: "test4",
       priority: "medium",
-      time: "13:00",
+      time: "12:44",
       id: 4,
-      dateStar: "21.12.2022",
-      dateFin: "22.12.2022",
+      dateStar: "2022-12-24",
+      dateFin: "2022-12-24",
       description: "test test",
     },
     {
       section: "Done",
-      name: "test5",
+      title: "test5",
       priority: "medium",
-      time: "13:00",
+      time: "12:44",
       id: 5,
-      dateStar: "21.12.2022",
-      dateFin: "22.12.2022",
+      dateStar: "2022-12-24",
+      dateFin: "2022-12-24",
       description: "test test",
     },
   ]);
@@ -41,14 +41,20 @@ export default function Main() {
       <MainItem
         name={"ToDo"}
         children={cardsArr.filter((card) => card.section === "ToDo")}
+        handleOpenPopupEditTask={handleOpenPopupEditTask}
+        setTaskEdit={setTaskEdit}
       />
       <MainItem
         name={"In Progress"}
         children={cardsArr.filter((card) => card.section === "In Progress")}
+        handleOpenPopupEditTask={handleOpenPopupEditTask}
+        setTaskEdit={setTaskEdit}
       />
       <MainItem
         name={"Done"}
         children={cardsArr.filter((card) => card.section === "Done")}
+        handleOpenPopupEditTask={handleOpenPopupEditTask}
+        setTaskEdit={setTaskEdit}
       />
     </section>
   );

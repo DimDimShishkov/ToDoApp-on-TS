@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./ModalEditCard.css";
 
-export default function ModalEditCard({ card }) {
+export default function ModalEditCard({ card, handleSubmitForm }) {
   const [newValue, setNewValue] = useState({});
   const [validationMessage, setValidationMessage] = useState({});
   const [isFilesDropping, setFilesDropping] = useState(false);
@@ -12,7 +12,7 @@ export default function ModalEditCard({ card }) {
     setNewValue({
       title: card?.title,
       priority: card?.priority,
-      finDate: card?.finDate,
+      finDate: `${card?.dateFin}T${card?.time}`,
       description: card?.description,
       attachments: card?.attachments,
       id: card?.id,
@@ -21,7 +21,7 @@ export default function ModalEditCard({ card }) {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log({ ...newValue, attachments });
+    handleSubmitForm({ ...newValue, attachments });
   };
 
   const handleChange = (evt) => {
@@ -96,6 +96,7 @@ export default function ModalEditCard({ card }) {
             name="priority"
             onChange={handleChange}
             className="form__select"
+            value={newValue?.priority || ""}
           >
             <option
               className="form__option"
@@ -130,6 +131,7 @@ export default function ModalEditCard({ card }) {
             type="datetime-local"
             onChange={handleChange}
             className="form__select"
+            value={newValue?.finDate || ""}
           />
           {validationMessage?.finDate && (
             <span className="form__input-error">This field is required</span>
@@ -147,6 +149,7 @@ export default function ModalEditCard({ card }) {
             type="text"
             onChange={handleChange}
             name="description"
+            value={newValue?.description || ""}
           />
           <p className="form__title">Description</p>
 
