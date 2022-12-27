@@ -1,17 +1,40 @@
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { editCard, removeCard } from "../../store/actions/cards";
 import "./Card.css";
 
-export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
+export default function Card({
+  card,
+  handleOpenPopupEditTask,
+  setTaskEdit,
+  currentDate,
+  provided,
+  snapshot,
+  getItemStyle,
+}) {
+  const dispatch = useDispatch();
   const [isOptionsOpen, setOptionOpen] = useState(false);
+  const [devTime, setDevTime] = useState("");
 
-  const toQueueHandler = (card) => {
-    card.section = "ToDo";
-  };
-  const toProgressHandler = (card) => {
-    card.section = "In Progress";
-  };
-  const toDoneHandler = (card) => {
-    card.section = "Done";
+  useEffect(() => {
+    if (card.section === "In Progress") {
+      let diff = currentDate - card?.startDate;
+      const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+      const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+      const minutes = Math.floor(diff / 1000 / 60) % 60;
+      const seconds = Math.floor(diff / 1000) % 60;
+      if (diff <= 0) setDevTime(`added now`);
+      else if (days) setDevTime(`at work for ${days}d`);
+      else if (hours) setDevTime(`at work for ${hours}h`);
+      else if (minutes) setDevTime(`at work for ${minutes}min`);
+      else setDevTime(`at work for ${seconds}sec`);
+    }
+  }, [card, currentDate]);
+
+  const toNewSectionHandler = (card, name) => {
+    card.section = name;
+    dispatch(editCard(card));
+    name === "In Progress" && (card.startDate = new Date().getTime());
   };
 
   // отображение текста на модалки с меню
@@ -27,13 +50,13 @@ export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
           <button className="card__footer-button">add subtask</button>
           <button
             className="card__footer-button"
-            onClick={() => toProgressHandler(card)}
+            onClick={() => toNewSectionHandler(card, "In Progress")}
           >
             in Progress
           </button>
           <button
             className="card__footer-button"
-            onClick={() => toDoneHandler(card)}
+            onClick={() => toNewSectionHandler(card, "Done")}
           >
             Done
           </button>
@@ -50,13 +73,13 @@ export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
           <button className="card__footer-button">add subtask</button>
           <button
             className="card__footer-button"
-            onClick={() => toQueueHandler(card)}
+            onClick={() => toNewSectionHandler(card, "ToDo")}
           >
             toDo
           </button>
           <button
             className="card__footer-button"
-            onClick={() => toDoneHandler(card)}
+            onClick={() => toNewSectionHandler(card, "Done")}
           >
             Done
           </button>
@@ -73,13 +96,13 @@ export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
           <button className="card__footer-button">add subtask</button>
           <button
             className="card__footer-button"
-            onClick={() => toQueueHandler(card)}
+            onClick={() => toNewSectionHandler(card, "ToDo")}
           >
             toDo
           </button>
           <button
             className="card__footer-button"
-            onClick={() => toProgressHandler(card)}
+            onClick={() => toNewSectionHandler(card, "In Progress")}
           >
             in Progress
           </button>
@@ -87,39 +110,19 @@ export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
       );
   }
 
-  // слушатели на закрытие модалки меню
-  const closeOptions = (e) => {
-    let item = e.target
-      .closest("div")
-      .classList.contains("card__footer-menu_active");
-    if (!item) {
-      setOptionOpen(false);
-      document.removeEventListener("mouseup", closeOptions);
-    }
-  };
+  // слушатели на закрытие модалки меню таска
   useEffect(() => {
+    const closeOptions = (e) => {
+      let item = e.target
+        .closest("div")
+        .classList.contains("card__footer-menu_active");
+      if (!item) {
+        setOptionOpen(false);
+        document.removeEventListener("mouseup", closeOptions);
+      }
+    };
     isOptionsOpen && document.addEventListener("mouseup", closeOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOptionsOpen]);
-
-  // слушатели на перенос карточки
-  function dragStartHandler() {}
-  function dragEndHandler(e) {
-    if (e.target.closest(".card")) {
-      e.target.closest(".card").style.background = "rgb(252, 252, 253)";
-    }
-  }
-  function dragOverHandler(e) {
-    e.preventDefault();
-    if (e.target.closest(".card")) {
-      e.target.closest(".card").style.background = "lightgrey";
-    }
-  }
-  function dropHandler(e) {
-    if (e.target.closest(".card")) {
-      e.target.closest(".card").style.background = "rgb(252, 252, 253)";
-    }
-  }
 
   // открытие модалки для редактирования карточки
   const handleEditTask = () => {
@@ -130,32 +133,40 @@ export default function Card({ card, handleOpenPopupEditTask, setTaskEdit }) {
   return (
     <div
       className="card"
-      onDragStart={(e) => dragStartHandler(e /*, card */)}
-      onDragLeave={(e) => dragEndHandler(e)}
-      onDragEnd={(e) => dragEndHandler(e)}
-      onDragOver={(e) => dragOverHandler(e)}
-      onDrop={(e) => dropHandler(e /* , card */)}
-      draggable={true}
+      ref={provided.innerRef}
+      {...provided.draggableProps}
+      {...provided.dragHandleProps}
+      style={getItemStyle(snapshot.isDragging, provided.draggableProps.style)}
     >
       <div className="card__header">
         <h2 className="card__heading">{card.title}</h2>
         <div className="card__header-container">
           <p className="card__priority">{card.priority}</p>
-          <p className="card__time">{card.time}</p>
+          <p className="card__time">
+            {card.section === "ToDo"
+              ? "new task"
+              : card.section === "Done"
+              ? "completed"
+              : devTime}
+          </p>
         </div>
       </div>
       <div className="card__info">
         <div className="card__info-text">
           <p className="card__id">CardID: {card.id}</p>
-          <p className="card__date">Start: {card.dateStar}</p>
-          <p className="card__date">DL: {card.dateFin}</p>
+          <p className="card__date">
+            DL: {card.finDate ? card.finDate.split("T")[0] : "any"}
+          </p>
         </div>
         <div className="card__info-buttons">
           <button
             className=" card__edit-button card__button"
             onClick={() => handleEditTask()}
           />
-          <button className=" card__delete-button card__button" />
+          <button
+            className=" card__delete-button card__button"
+            onClick={() => dispatch(removeCard(card))}
+          />
         </div>
       </div>
       <p className="card__description">{card.description}</p>

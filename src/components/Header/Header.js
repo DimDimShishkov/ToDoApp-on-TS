@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import "./Header.css";
 
 export default function Header({
@@ -6,8 +5,6 @@ export default function Header({
   setCurrentProject,
   handleOpenPopupNewTask,
 }) {
-  const dispatch = useDispatch();
-
   return (
     <header className="header">
       <h1 className="header__title">{currentProject}</h1>

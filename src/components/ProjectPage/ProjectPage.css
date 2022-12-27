@@ -1,11 +1,5 @@
 .project-page {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 10px;
-}
-
-@media screen and (max-width: 1000px) {
-  .project-page {
-    flex-direction: column;
-  }
 }

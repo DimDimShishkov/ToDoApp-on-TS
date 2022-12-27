@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import "./ModalNewCard.css";
 
@@ -91,12 +91,9 @@ export default function ModalNewCard({ handleSubmitForm }) {
         <label className="form__label-select">
           <p className="form__title-select">Finish at</p>
           <input
-            {...register("finDate", {
-              required: "this field is required.",
-            })}
-            required={true}
             className="form__select"
             type="datetime-local"
+            {...register("finDate")}
           />
         </label>
 

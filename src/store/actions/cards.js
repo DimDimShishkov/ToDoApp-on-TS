@@ -3,6 +3,11 @@ export const addNewCard = (item) => ({
   payload: item,
 });
 
+export const editCard = (item) => ({
+  type: "EDIT_CARD",
+  payload: item,
+});
+
 export const removeCard = (item) => ({
   type: "REMOVE_CARD",
   payload: item,

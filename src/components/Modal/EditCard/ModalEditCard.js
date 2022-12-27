@@ -10,12 +10,14 @@ export default function ModalEditCard({ card, handleSubmitForm }) {
   // загрузка данных редактируемой карточки
   useEffect(() => {
     setNewValue({
-      title: card?.title,
-      priority: card?.priority,
-      finDate: `${card?.dateFin}T${card?.time}`,
-      description: card?.description,
       attachments: card?.attachments,
+      description: card?.description,
+      finDate: card?.finDate,
       id: card?.id,
+      priority: card?.priority,
+      section: card?.section,
+      startDate: card?.startDate,
+      title: card?.title,
     });
   }, [card]);
 
@@ -126,7 +128,6 @@ export default function ModalEditCard({ card, handleSubmitForm }) {
         <label className="form__label-select">
           <p className="form__title-select">Finish at</p>
           <input
-            required={true}
             name="finDate"
             type="datetime-local"
             onChange={handleChange}
