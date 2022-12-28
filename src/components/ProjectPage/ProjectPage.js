@@ -4,7 +4,11 @@ import Main from "../Main/Main";
 import ModalCard from "../Modal/ModalCard";
 import "./ProjectPage.css";
 
-export default function ProjectPage({ currentProject, setCurrentProject }) {
+export default function ProjectPage({
+  currentProjectName,
+  currentProjectID,
+  setCurrentProject,
+}) {
   const [isNewTaskModalOpen, setNewTaskModalOpen] = useState(false);
   const [isEditTaskModalOpen, setEditTaskModalOpen] = useState(false);
   const [isTaskEdit, setTaskEdit] = useState({});
@@ -22,11 +26,13 @@ export default function ProjectPage({ currentProject, setCurrentProject }) {
   return (
     <section className="project-page">
       <Header
-        currentProject={currentProject}
+        currentProject={currentProjectName}
         setCurrentProject={setCurrentProject}
         handleOpenPopupNewTask={() => setNewTaskModalOpen(!isNewTaskModalOpen)}
       />
       <Main
+        currentProjectName={currentProjectName}
+        currentProjectID={currentProjectID}
         setTaskEdit={setTaskEdit}
         currentDate={currentDate}
         handleOpenPopupEditTask={() =>

@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Sample project",
+    "id": 1,
+    "tasks": [
+      {
+        "section": "ToDo",
+        "title": "Task 1",
+        "priority": "low",
+        "id": 1,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "ToDo",
+        "title": "Task 2",
+        "priority": "medium",
+        "id": 2,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "ToDo",
+        "title": "Task 3",
+        "priority": "medium",
+        "id": 3,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "In Progress",
+        "title": "Task 4",
+        "priority": "medium",
+        "id": 4,
+        "startDate": "2022-12-24",
+        "description": "test test"
+      },
+      {
+        "section": "Done",
+        "title": "Task 5",
+        "priority": "medium",
+        "id": 5,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "test test"
+      }
+    ]
+  },
+  {
+    "name": "Sample another project",
+    "id": 2,
+    "tasks": [
+      {
+        "section": "ToDo",
+        "title": "Task 1",
+        "priority": "low",
+        "id": 1,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "ToDo",
+        "title": "Task 2",
+        "priority": "medium",
+        "id": 2,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "ToDo",
+        "title": "Task 3",
+        "priority": "medium",
+        "id": 3,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "lorem"
+      },
+      {
+        "section": "In Progress",
+        "title": "Task 4",
+        "priority": "medium",
+        "id": 4,
+        "startDate": "2022-12-24",
+        "description": "test test"
+      },
+      {
+        "section": "Done",
+        "title": "Task 5",
+        "priority": "medium",
+        "id": 5,
+        "startDate": "2022-12-24",
+        "finDate": "2022-12-24T12:44",
+        "description": "test test"
+      }
+    ]
+  }
+]

@@ -4,22 +4,24 @@ import StartPage from "../StartPage/StartPage";
 import "./App.css";
 
 export default function App() {
-  const [currentProject, setCurrentProject] = useState("");
+  const [currentProjectName, setCurrentProjectName] = useState("");
+  const [currentProjectID, setCurrentProjectID] = useState("");
 
+  function handleSetCurrentProject(project) {
+    setCurrentProjectID(project.id);
+    setCurrentProjectName(project.name);
+  }
   return (
     <div className="page">
-      <ProjectPage
-        currentProject={currentProject}
-        setCurrentProject={setCurrentProject}
-      />
-      {/*       {currentProject ? (
+      {currentProjectName ? (
         <ProjectPage
-          currentProject={currentProject}
-          setCurrentProject={setCurrentProject}
+          currentProjectName={currentProjectName}
+          currentProjectID={currentProjectID}
+          setCurrentProject={handleSetCurrentProject}
         />
       ) : (
-        <StartPage setCurrentProject={setCurrentProject} />
-      )} */}
+        <StartPage setCurrentProject={handleSetCurrentProject} />
+      )}
     </div>
   );
 }

@@ -1,30 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import "./Main.css";
 import MainItem from "./MainItem";
-import { editCard } from "../../store/actions/cards";
+import { editCard, setCurrentProject } from "../../store/actions/cards";
 
 export default function Main({
+  currentProjectID,
   setTaskEdit,
   handleOpenPopupEditTask,
   currentDate,
 }) {
   const dispatch = useDispatch();
-  const cards = useSelector(({ cards }) => cards.cardsItems);
-  const initialSectionsName = ["ToDo", "In Progress", "Done"];
+  useEffect(() => {
+    dispatch(setCurrentProject(currentProjectID));
+  }, [currentProjectID, dispatch]);
 
+  const cards = useSelector(({ cards }) => cards?.cardsItems);
+  const initialSectionsName = ["ToDo", "In Progress", "Done"];
   // стилизация перемещения
   const getItemStyle = (isDragging, draggableStyle) => ({
-    userSelect: "none",
-    padding: 16,
-    margin: `0 0 8px 0`,
-    background: isDragging ? "lightgreen" : "rgb(252, 252, 253)",
+    background: isDragging ? "rgb(144, 238, 144)" : "rgb(252, 252, 253)",
     ...draggableStyle,
   });
   const getListStyle = (isDraggingOver) => ({
-    background: isDraggingOver ? "lightblue" : "rgb(246, 248, 250)",
-    padding: 8,
+    background: isDraggingOver ? "rgb(173, 216, 230)" : "rgb(246, 248, 250)",
   });
   // функция сохранения при перемещении
   function onDragEnd(result) {
@@ -32,6 +32,8 @@ export default function Main({
     if (!destination) return;
     const [chosenCard] = cards.filter((card) => card.id === +draggableId);
     chosenCard.section = destination.droppableId;
+    destination.droppableId === "In Progress" &&
+      (chosenCard.startDate = new Date().getTime());
     dispatch(editCard(chosenCard));
   }
 

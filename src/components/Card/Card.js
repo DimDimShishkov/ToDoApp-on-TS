@@ -38,10 +38,10 @@ export default function Card({
   };
 
   // отображение текста на модалки с меню
-  let content;
+  let modalContent;
   switch (card.section) {
     case "ToDo":
-      content = (
+      modalContent = (
         <div
           className={`card__footer-menu ${
             isOptionsOpen && "card__footer-menu_active"
@@ -64,7 +64,7 @@ export default function Card({
       );
       break;
     case "In Progress":
-      content = (
+      modalContent = (
         <div
           className={`card__footer-menu ${
             isOptionsOpen && "card__footer-menu_active"
@@ -87,7 +87,7 @@ export default function Card({
       );
       break;
     default:
-      content = (
+      modalContent = (
         <div
           className={`card__footer-menu ${
             isOptionsOpen && "card__footer-menu_active"
@@ -108,6 +108,18 @@ export default function Card({
           </button>
         </div>
       );
+  }
+
+  let priorityClass;
+  switch (card.priority) {
+    case "low":
+      priorityClass = "card__priority_low";
+      break;
+    case "medium":
+      priorityClass = "card__priority_medium";
+      break;
+    default:
+      priorityClass = "card__priority_hight";
   }
 
   // слушатели на закрытие модалки меню таска
@@ -141,7 +153,7 @@ export default function Card({
       <div className="card__header">
         <h2 className="card__heading">{card.title}</h2>
         <div className="card__header-container">
-          <p className="card__priority">{card.priority}</p>
+          <p className={`card__priority ${priorityClass}`}>{card.priority}</p>
           <p className="card__time">
             {card.section === "ToDo"
               ? "new task"
@@ -183,7 +195,7 @@ export default function Card({
             ...
           </button>
 
-          {content}
+          {modalContent}
         </div>
       </div>
     </div>

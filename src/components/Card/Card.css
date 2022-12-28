@@ -1,17 +1,10 @@
 .card {
-  background: rgb(252, 252, 253);
-  border: 1px solid rgb(0, 0, 0);
   border-radius: 6px;
   box-shadow: 0 0.5px 2px rgb(16 24 40 / 70%);
-  cursor: -webkit-grab;
-  cursor: grab;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  /* max-width: 320px; */
-  /* min-width: 100%; */
-  /* overflow: hidden;   */
-  padding: 5px;
+  padding: 10px;
   position: relative;
   touch-action: auto;
   transition: 0.2s;
@@ -40,13 +33,24 @@
 }
 
 .card__priority {
-  align-items: center;
   border-radius: 5px;
-  display: flex;
   line-height: 16px;
   font-size: 15px;
   height: 20px;
-  margin: 0;
+  margin: auto;
+  width: 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card__priority_low {
+  background-color: rgba(0, 255, 0, 0.5);
+}
+.card__priority_medium {
+  background-color: rgba(255, 255, 0, 0.5);
+}
+.card__priority_hight {
+  background-color: rgba(255, 0, 0, 0.5);
 }
 
 .card__time {

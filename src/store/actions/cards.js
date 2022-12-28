@@ -1,19 +1,19 @@
-export const addNewCard = (item) => ({
+export const addNewCard = (card) => ({
   type: "ADD_NEW_CARD",
-  payload: item,
+  payload: card,
 });
 
-export const editCard = (item) => ({
+export const editCard = (card) => ({
   type: "EDIT_CARD",
-  payload: item,
+  payload: card,
 });
 
-export const removeCard = (item) => ({
+export const removeCard = (card) => ({
   type: "REMOVE_CARD",
-  payload: item,
+  payload: card,
 });
 
-/* export const setCartItems = (item) => ({
-  type: "SET_CART_ITEMS",
-  payload: item,
-}); */
+export const setCurrentProject = (project) => ({
+  type: "SET_CURRENT_PROJECT",
+  payload: project,
+});
