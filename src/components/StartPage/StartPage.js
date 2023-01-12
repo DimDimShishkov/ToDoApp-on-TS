@@ -1,8 +1,13 @@
+import React from "react";
 import { useSelector } from "react-redux";
 import "./StartPage.css";
 
-export default function StartPage({ setCurrentProject }) {
-  const projects = useSelector(({ projects }) => projects.projectsItems);
+/* interface StartPageProps {
+  setCurrentProject: any;
+} */
+
+const StartPage = ({ setCurrentProject }) => {
+  const projects = useSelector((store) => store.projectsReducer.projectsItems);
   return (
     <div className="start-page">
       <div className="start-page__container">
@@ -21,4 +26,6 @@ export default function StartPage({ setCurrentProject }) {
       </div>
     </div>
   );
-}
+};
+
+export default StartPage;

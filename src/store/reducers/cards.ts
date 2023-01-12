@@ -1,21 +1,28 @@
-let initialItems = JSON.parse(localStorage.getItem("toDoCards"));
+import { CardType } from "../../utils/types/CardType";
 
-function lastIdHandler(arr) {
-  return arr[arr.length - 1]?.id;
+function lastIdHandler(cards: CardType[]) {
+  return cards[cards.length - 1]?.id;
 }
 
 const initialState = {
   currentProject: "",
-  cardsItems: [],
+  cardsItems: [] as CardType[],
   lastID: 0,
 };
 
-const cards = (state = initialState, action) => {
-  function setCardsToLS(cards) {
-    let newArr = JSON.parse(localStorage.getItem("toDoCards")).map((project) =>
-      project.id === state.currentProject
-        ? { ...project, tasks: cards }
-        : { ...project }
+export const cardsReducer = (
+  state = initialState,
+  action: {
+    type: string;
+    payload: CardType;
+  }
+) => {
+  function setCardsToLS(cards: CardType[]) {
+    let newArr = JSON.parse(localStorage.getItem("toDoCards")).map(
+      (project: { id: string }) =>
+        project.id === state.currentProject
+          ? { ...project, tasks: cards }
+          : { ...project }
     );
     localStorage.setItem("toDoCards", JSON.stringify(newArr));
   }
@@ -23,9 +30,14 @@ const cards = (state = initialState, action) => {
   switch (action.type) {
     // установить текущий проект и карточки
     case "SET_CURRENT_PROJECT": {
-      const newCardsItems = initialItems.find(
-        (project) => project.id === action.payload
-      ).tasks;
+      let initialItems = JSON.parse(localStorage.getItem("toDoCards"));
+      const newCardsItems = initialItems
+        ? initialItems.find(
+            (project: {
+              id: { startDate: string; section: string; id: number };
+            }) => project.id === action.payload
+          ).tasks
+        : false;
       return {
         ...state,
         currentProject: action.payload,
@@ -35,9 +47,9 @@ const cards = (state = initialState, action) => {
     }
     // добавить карточку
     case "ADD_NEW_CARD": {
-      action.payload.startDate = new Date().getTime();
+      action.payload.startDate = new Date().getTime().toString();
       action.payload.section = "ToDo";
-      action.payload.id = state.lastID + 1;
+      action.payload.id = ++state.lastID;
       const newCardsItems = [...state.cardsItems, action.payload];
       setCardsToLS(newCardsItems);
       return {
@@ -76,5 +88,3 @@ const cards = (state = initialState, action) => {
       return state;
   }
 };
-
-export default cards;

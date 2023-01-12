@@ -16,7 +16,7 @@ export default function Main({
     dispatch(setCurrentProject(currentProjectID));
   }, [currentProjectID, dispatch]);
 
-  const cards = useSelector(({ cards }) => cards?.cardsItems);
+  const cards = useSelector((store) => store.cardsReducer.cardsItems);
   const initialSectionsName = ["ToDo", "In Progress", "Done"];
   // стилизация перемещения
   const getItemStyle = (isDragging, draggableStyle) => ({
@@ -40,23 +40,27 @@ export default function Main({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <section className="main">
-        {initialSectionsName.map((name, ind) => (
-          <Droppable key={ind} droppableId={name}>
-            {(provided, snapshot) => (
-              <MainItem
-                name={name}
-                currentDate={currentDate}
-                children={cards.filter((card) => card.section === name)}
-                handleOpenPopupEditTask={handleOpenPopupEditTask}
-                setTaskEdit={setTaskEdit}
-                provided={provided}
-                snapshot={snapshot}
-                getListStyle={getListStyle}
-                getItemStyle={getItemStyle}
-              />
-            )}
-          </Droppable>
-        ))}
+        {cards ? (
+          initialSectionsName.map((name, ind) => (
+            <Droppable key={ind} droppableId={name}>
+              {(provided, snapshot) => (
+                <MainItem
+                  name={name}
+                  currentDate={currentDate}
+                  children={cards.filter((card) => card.section === name)}
+                  handleOpenPopupEditTask={handleOpenPopupEditTask}
+                  setTaskEdit={setTaskEdit}
+                  provided={provided}
+                  snapshot={snapshot}
+                  getListStyle={getListStyle}
+                  getItemStyle={getItemStyle}
+                />
+              )}
+            </Droppable>
+          ))
+        ) : (
+          <p>Данные удалены. Просьба перезагрузить страницу</p>
+        )}
       </section>
     </DragDropContext>
   );

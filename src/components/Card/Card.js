@@ -18,7 +18,10 @@ export default function Card({
 
   useEffect(() => {
     if (card.section === "In Progress") {
-      let diff = currentDate - card?.startDate;
+      let diff =
+        currentDate - card?.startDate
+          ? currentDate - card?.startDate
+          : currentDate - new Date(card?.startDate);
       const days = Math.floor(diff / 1000 / 60 / 60 / 24);
       const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
       const minutes = Math.floor(diff / 1000 / 60) % 60;

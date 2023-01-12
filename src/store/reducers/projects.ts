@@ -1,4 +1,5 @@
-import initialProjects from "../../constants/initialProjects.json";
+import initialProjects from "../../utils/initialProjects.json";
+import { ProjectType } from "../../utils/types/ProjectType";
 
 let initialProjectLS = localStorage.getItem("toDoCards");
 let initialProject;
@@ -7,12 +8,12 @@ if (!initialProjectLS) {
   localStorage.setItem("toDoCards", JSON.stringify(initialProjects));
 } else initialProject = JSON.parse(initialProjectLS);
 
-function setCardsToLS(cards) {
-  localStorage.setItem("toDoCards", JSON.stringify(cards));
+function setProjectsToLS(projects: ProjectType[]) {
+  localStorage.setItem("toDoCards", JSON.stringify(projects));
 }
 
-function lastIdHandler(arr) {
-  return arr[arr.length - 1]?.id || 0;
+function lastIdHandler(projects: ProjectType[]) {
+  return projects[projects.length - 1]?.id || 0;
 }
 
 const initialState = {
@@ -20,13 +21,16 @@ const initialState = {
   lastID: lastIdHandler(initialProject),
 };
 
-const projects = (state = initialState, action) => {
+export const projectsReducer = (
+  state = initialState,
+  action: { type: string; payload: ProjectType }
+) => {
   switch (action.type) {
     // добавить новый проект
     case "ADD_NEW_PROJECT": {
       action.payload.id = state.lastID + 1;
-      const newItems = [...state.projectsItems, action.payload];
-      setCardsToLS(newItems);
+      const newItems: ProjectType[] = [...state.projectsItems, action.payload];
+      setProjectsToLS(newItems);
       return {
         ...state,
         projectsItems: newItems,
@@ -36,10 +40,11 @@ const projects = (state = initialState, action) => {
 
     // отредактировать название проекта
     case "EDIT_PROJECT": {
-      const newItems = state.projectsItems.map((el) =>
-        el.id === action.payload.id ? action.payload : { ...el }
+      const newItems: ProjectType[] = state.projectsItems.map(
+        (project: ProjectType) =>
+          project.id === action.payload.id ? action.payload : { ...project }
       );
-      setCardsToLS(newItems);
+      setProjectsToLS(newItems);
       return {
         ...state,
         cardsItems: newItems,
@@ -49,10 +54,10 @@ const projects = (state = initialState, action) => {
 
     // убрать проект
     case "REMOVE_PROJECT": {
-      const newItems = state.projectsItems.filter(
-        (el) => el.id !== action.payload.id
+      const newItems: ProjectType[] = state.projectsItems.filter(
+        (project: ProjectType) => project.id !== action.payload.id
       );
-      setCardsToLS(newItems);
+      setProjectsToLS(newItems);
       return {
         ...state,
         cardsItems: newItems,
@@ -63,5 +68,3 @@ const projects = (state = initialState, action) => {
       return state;
   }
 };
-
-export default projects;
