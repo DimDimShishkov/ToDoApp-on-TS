@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/ToDoApp-on-TS/static/css/main.15ba1d3a.css",
+    "main.js": "/ToDoApp-on-TS/static/js/main.9bac05d3.js",
+    "static/media/Inter-Medium.woff?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Medium.9053572c46aeb4b16caa.woff",
+    "static/media/Inter-Black.woff?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Black.c6938660eec019fefd68.woff",
+    "static/media/Inter-Regular.woff?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Regular.8c206db99195777c6769.woff",
+    "static/media/Inter-Medium.woff2?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Medium.293fd13dbca5a3e450ef.woff2",
+    "static/media/Inter-Black.woff2?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Black.15ca31c0a2a68f76d2d1.woff2",
+    "static/media/Inter-Regular.woff2?v=3.19": "/ToDoApp-on-TS/static/media/Inter-Regular.c8ba52b05a9ef10f4758.woff2",
+    "index.html": "/ToDoApp-on-TS/index.html",
+    "static/media/CloseIconDesctop.svg": "/ToDoApp-on-TS/static/media/CloseIconDesctop.039f1f5203f653b4bacd.svg",
+    "static/media/CloseIconMobile.svg": "/ToDoApp-on-TS/static/media/CloseIconMobile.622e8cdafa2222aa7c54.svg",
+    "main.15ba1d3a.css.map": "/ToDoApp-on-TS/static/css/main.15ba1d3a.css.map",
+    "main.9bac05d3.js.map": "/ToDoApp-on-TS/static/js/main.9bac05d3.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.15ba1d3a.css",
+    "static/js/main.9bac05d3.js"
+  ]
+}
